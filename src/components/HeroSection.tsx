@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import { Mail, Linkedin, MapPin } from "lucide-react";
-import profileAvatar from "@/assets/profile-avatar.png";
+import profilePhoto from "@/assets/profile-photo.jpg";
 
 const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    // Trigger animations after mount
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -39,48 +47,77 @@ const HeroSection = () => {
         style={{ transform: `translateY(${scrollY * -0.06}px)` }}
       />
 
-      <div className="container relative z-10">
+      <div className="container relative z-10 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Profile image with parallax */}
+          {/* Profile image with parallax and animations */}
           <div 
-            className="mb-10"
+            className={`mb-8 sm:mb-10 transition-all duration-700 ${
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
             style={{ transform: `translateY(${scrollY * 0.08}px)` }}
           >
-            <div className="w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden border-4 border-card shadow-lg mx-auto relative">
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/10" />
-              <img 
-                src={profileAvatar} 
-                alt="Mochammad Wahyu Ramadhan" 
-                className="w-full h-full object-cover"
-              />
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-52 lg:h-52 mx-auto group">
+              {/* Animated ring */}
+              <div className="absolute inset-0 rounded-full border-2 border-primary/30 animate-pulse" />
+              <div className="absolute -inset-2 rounded-full border border-accent/20 group-hover:border-accent/40 transition-colors duration-500" />
+              
+              {/* Photo container */}
+              <div className="w-full h-full rounded-full overflow-hidden border-4 border-card shadow-xl relative group-hover:shadow-2xl group-hover:scale-105 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary/20 z-10" />
+                <img 
+                  src={profilePhoto} 
+                  alt="Mochammad Wahyu Ramadhan" 
+                  className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
+                />
+              </div>
             </div>
           </div>
 
-          {/* Text content */}
-          <p className="text-primary font-medium mb-4 text-lg tracking-wide">
+          {/* Text content with staggered animations */}
+          <p 
+            className={`text-primary font-medium mb-3 sm:mb-4 text-base sm:text-lg tracking-wide transition-all duration-700 delay-100 ${
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
             Halo, saya
           </p>
           
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 text-foreground leading-tight">
+          <h1 
+            className={`font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 sm:mb-8 text-foreground leading-tight transition-all duration-700 delay-200 ${
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
             Mochammad Wahyu Ramadhan
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p 
+            className={`text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2 transition-all duration-700 delay-300 ${
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
             Mahasiswa Psikologi dengan ketertarikan pada Data Science, Teknologi, dan Perilaku Manusia. 
             Fokus pada Psikologi Kognitif & Psikolinguistik.
           </p>
 
           {/* Location */}
-          <p className="flex items-center justify-center gap-2 text-muted-foreground mb-10">
+          <p 
+            className={`flex items-center justify-center gap-2 text-sm sm:text-base text-muted-foreground mb-8 sm:mb-10 transition-all duration-700 delay-400 ${
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
             <MapPin className="w-4 h-4" />
             Surabaya, Jawa Timur, Indonesia
           </p>
 
           {/* CTA buttons */}
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div 
+            className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center transition-all duration-700 delay-500 ${
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
             <a 
               href="mailto:wahyuramadhan9090@gmail.com"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 hover:scale-105 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 hover:scale-105 hover:shadow-lg transition-all duration-300"
             >
               <Mail className="w-4 h-4" />
               Hubungi Saya
@@ -89,7 +126,7 @@ const HeroSection = () => {
               href="https://www.linkedin.com/in/mochammad-wahyu-ramadhan"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border-2 border-border bg-card hover:border-primary/50 hover:scale-105 transition-all font-medium"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full border-2 border-border bg-card hover:border-primary/50 hover:scale-105 hover:shadow-lg transition-all duration-300 font-medium"
             >
               <Linkedin className="w-4 h-4" />
               LinkedIn
