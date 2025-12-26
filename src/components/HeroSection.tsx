@@ -1,10 +1,23 @@
 import { useEffect, useState } from "react";
 import { Mail, Linkedin, MapPin } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
+import { useTypingAnimation } from "@/hooks/use-typing-animation";
 
 const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const { displayText } = useTypingAnimation({
+    texts: [
+      "Data Science Enthusiast",
+      "Psychology Student",
+      "Machine Learning Explorer",
+      "Cognitive Psychology",
+    ],
+    typingSpeed: 80,
+    deletingSpeed: 40,
+    pauseDuration: 2500,
+  });
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -83,15 +96,27 @@ const HeroSection = () => {
           </p>
           
           <h1 
-            className={`font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 sm:mb-8 text-foreground leading-tight transition-all duration-700 delay-200 ${
+            className={`font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 sm:mb-6 text-foreground leading-tight transition-all duration-700 delay-200 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
             Mochammad Wahyu Ramadhan
           </h1>
+
+          {/* Typing animation */}
+          <div 
+            className={`h-8 sm:h-10 mb-6 sm:mb-8 transition-all duration-700 delay-300 ${
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
+            <span className="text-lg sm:text-xl md:text-2xl text-accent font-medium">
+              {displayText}
+              <span className="animate-pulse text-primary">|</span>
+            </span>
+          </div>
           
           <p 
-            className={`text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2 transition-all duration-700 delay-300 ${
+            className={`text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2 transition-all duration-700 delay-400 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
@@ -101,7 +126,7 @@ const HeroSection = () => {
 
           {/* Location */}
           <p 
-            className={`flex items-center justify-center gap-2 text-sm sm:text-base text-muted-foreground mb-8 sm:mb-10 transition-all duration-700 delay-400 ${
+            className={`flex items-center justify-center gap-2 text-sm sm:text-base text-muted-foreground mb-8 sm:mb-10 transition-all duration-700 delay-500 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
@@ -111,7 +136,7 @@ const HeroSection = () => {
 
           {/* CTA buttons */}
           <div 
-            className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center transition-all duration-700 delay-500 ${
+            className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center transition-all duration-700 delay-[600ms] ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >

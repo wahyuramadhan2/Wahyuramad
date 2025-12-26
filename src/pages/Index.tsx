@@ -7,6 +7,7 @@ import ExperienceSection from "@/components/ExperienceSection";
 import EducationSection from "@/components/EducationSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import BackToTopButton from "@/components/BackToTopButton";
 
 const Index = () => {
   return (
@@ -21,7 +22,7 @@ const Index = () => {
         <meta property="og:title" content="Mochammad Wahyu Ramadhan | Portfolio" />
         <meta property="og:description" content="Psychology Student with Interest in Data, Technology, and Human Behavior" />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://wahyuramadhan2.github.io/wahyuportfolio/" />
+        <link rel="canonical" href="https://wahyuramadhan2.github.io/wahyuramad/" />
       </Helmet>
 
       <div className="min-h-screen bg-background">
@@ -35,6 +36,7 @@ const Index = () => {
           <ContactSection />
         </main>
         <Footer />
+        <BackToTopButton />
       </div>
     </>
   );
