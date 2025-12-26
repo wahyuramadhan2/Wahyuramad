@@ -20,6 +20,7 @@ const SkillsSection = () => {
   const technicalSkills: { name: string; level: SkillLevel }[] = [
     { name: "Microsoft PowerPoint", level: "Expert" },
     { name: "Microsoft Word", level: "Expert" },
+    { name: "Microsoft Excel", level: "Intermediate" },
     { name: "SEO", level: "Intermediate" },
     { name: "SQL", level: "Intermediate" },
     { name: "Power BI", level: "Intermediate" },
